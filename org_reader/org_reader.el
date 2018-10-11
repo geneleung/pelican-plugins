@@ -2,7 +2,7 @@
 (require 'org)
 (require 'ox)
 
-(setq org-export-with-toc nil);;设置生成时不输出文章章节目录
+(setq org-export-with-toc nil)
 (defun org->pelican (filename backend)
   (progn
     (save-excursion
@@ -37,8 +37,9 @@
                              (org-read-date nil nil dateobj nil)
                            (org-timestamp-format dateobj "%Y-%m-%d")))
 
-                 :author (substring-no-properties
-                          (car (plist-get org-export-env ':author)))
+                 ;:author (substring-no-properties
+					;         (car (plist-get org-export-env ':author)))
+		 :author "chappie"
 
                  ; org file properties
                  :category (cdr (assoc-string "CATEGORY" org-file-properties t))
