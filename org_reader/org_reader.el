@@ -2,6 +2,7 @@
 (require 'org)
 (require 'ox)
 
+(setq org-export-with-toc nil);;设置生成时不输出文章章节目录
 (defun org->pelican (filename backend)
   (progn
     (save-excursion
