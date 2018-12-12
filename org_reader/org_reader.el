@@ -54,8 +54,9 @@ unwanted space when exporting org-mode to html."
                              (org-read-date nil nil dateobj nil)
                            (org-timestamp-format dateobj "%Y-%m-%d")))
 
-                 :author (substring-no-properties
-                          (car (plist-get org-export-env ':author)))
+                 ;:author (substring-no-properties
+					;         (car (plist-get org-export-env ':author)))
+		 :author "chappie"
 
                  ; org file properties
                  :category (cdr (assoc-string "CATEGORY" org-file-properties t))
