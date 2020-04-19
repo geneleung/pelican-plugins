@@ -1,8 +1,25 @@
+(add-to-list 'load-path "~/.emacs.d/plugin")
 (require 'json)
 (require 'org)
 (require 'ox)
+(require 'ox-publish)
+(require 'htmlize)
 
-(setq org-export-with-toc nil)
+;; org导出html时换行不出现空格
+(defadvice org-html-paragraph (before org-html-paragraph-advice
+                                      (paragraph contents info) activate)
+  "Join consecutive Chinese lines into a single long line without
+unwanted space when exporting org-mode to html."
+  (let* ((origin-contents (ad-get-arg 1))
+         (fix-regexp "[[:multibyte:]]")
+         (fixed-contents
+          (replace-regexp-in-string
+           (concat
+            "\\(" fix-regexp "\\) *\n *\\(" fix-regexp "\\)") "\\1\\2" origin-contents)))
+
+    (ad-set-arg 1 fixed-contents)))
+(setq org-html-htmlize-output-type 'css)
+;; (setq org-export-with-toc nil);;设置生成时不输出文章章节目录
 (defun org->pelican (filename backend)
   (progn
     (save-excursion
